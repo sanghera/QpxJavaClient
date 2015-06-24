@@ -36,6 +36,7 @@ public class QpxClientTest {
 
 	@Mock
 	private QpxResponse aTripDto;
+
 	@Mock
 	private QpxResponse anotherTripDto;
 
