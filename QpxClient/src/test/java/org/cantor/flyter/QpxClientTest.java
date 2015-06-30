@@ -4,7 +4,6 @@ import org.cantor.flyter.exceptions.QpxBadRequestException;
 import org.cantor.flyter.exceptions.QpxCommunicationException;
 import org.cantor.flyter.exceptions.QpxUnexpectedInteractionException;
 import org.cantor.flyter.model.request.QpxRequestForm;
-import org.cantor.flyter.model.response.QpxResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +17,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 import static org.mockito.BDDMockito.willReturn;
@@ -33,12 +30,6 @@ public class QpxClientTest {
 	private static final String API_KEY = "keyPlz";
 	private static final String API_KEY_PROPERTY = "api_key";
 	private static final String ENDPOINT_URL_PROPERTY = "endpoint_url";
-
-	@Mock
-	private QpxResponse aTripDto;
-
-	@Mock
-	private QpxResponse anotherTripDto;
 
 	@Mock
 	private Properties properties;
@@ -55,10 +46,6 @@ public class QpxClientTest {
 	@Mock
 	private Response response;
 
-	@Mock
-	private QpxResponseParser qpxResponseParser;
-
-	private List<QpxResponse> tripDtos = Arrays.asList(aTripDto, anotherTripDto);
 	private final QpxRequestForm requestForm = new QpxRequestForm();
 
 	private QpxClient qpxClient;
@@ -67,13 +54,12 @@ public class QpxClientTest {
 	public void setup() {
 		willReturn(API_KEY).given(properties).getProperty(API_KEY_PROPERTY);
 		willReturn(ENDPOINT_URL).given(properties).getProperty(ENDPOINT_URL_PROPERTY);
-		willReturn(tripDtos).given(qpxResponseParser).parseResponse(any(String.class));
-		qpxClient = new QpxClient(client, properties, qpxResponseParser);
+		qpxClient = new QpxClient(client, properties);
 		setupWebServiceCall();
 	}
 
 	@Test
-	public void givenARequestForm_whenFetchingFlightsInfo_thenAnHttpPostIsMadeToTheWebService(){
+	public void givenARequestForm_whenFetchingFlightsInfo_thenAnHttpPostIsMadeToTheWebService() {
 		qpxClient.fetchData(requestForm);
 
 		verify(request).post(any(Entity.class));

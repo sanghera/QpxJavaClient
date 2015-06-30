@@ -1,7 +1,6 @@
 package org.cantor.flyter.qpxclient;
 
 import org.cantor.flyter.QpxClient;
-import org.cantor.flyter.QpxResponseParser;
 import org.cantor.flyter.model.request.Passengers;
 import org.cantor.flyter.model.request.QpxRequestForm;
 import org.cantor.flyter.model.request.Request;
@@ -43,7 +42,7 @@ public class QpxInteropTest {
 	public void setup() {
 		Client client = ClientBuilder.newClient();
 		requestForm = new QpxRequestForm();
-		qpxClient = new QpxClient(client, properties, new QpxResponseParser());
+		qpxClient = new QpxClient(client, properties);
 		buildRequestForm();
 	}
 

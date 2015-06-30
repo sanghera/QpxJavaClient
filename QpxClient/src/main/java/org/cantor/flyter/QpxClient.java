@@ -13,7 +13,6 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.List;
 import java.util.Properties;
 
 public class QpxClient {
@@ -21,13 +20,11 @@ public class QpxClient {
 	private final Client restClient;
 	private final String apiKey;
 	private final String endpointURL;
-	private final QpxResponseParser qpxResponseParser;
 
-	public QpxClient(Client restClient, Properties properties, QpxResponseParser qpxResponseParser) {
+	public QpxClient(Client restClient, Properties properties) {
 		this.restClient = restClient;
 		this.apiKey = properties.getProperty("api_key");
 		this.endpointURL = properties.getProperty("endpoint_url");
-		this.qpxResponseParser = qpxResponseParser;
 	}
 
 	public QpxResponse fetchData(QpxRequestForm requestForm) {
