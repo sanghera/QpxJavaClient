@@ -5,6 +5,7 @@ import org.cantor.flyter.exceptions.QpxBadRequestException;
 import org.cantor.flyter.exceptions.QpxCommunicationException;
 import org.cantor.flyter.exceptions.QpxUnexpectedInteractionException;
 import org.cantor.flyter.model.request.QpxRequestForm;
+import org.cantor.flyter.model.response.QpxResponse;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -29,7 +30,7 @@ public class QpxClient {
 		this.qpxResponseParser = qpxResponseParser;
 	}
 
-	public List<RoundTripDto> fetchData(QpxRequestForm requestForm) {
+	public QpxResponse fetchData(QpxRequestForm requestForm) {
 		Invocation.Builder request = this.createRequest();
 
 		Gson gson = new Gson();
@@ -40,7 +41,7 @@ public class QpxClient {
 		Response response = request.post(Entity.entity(jsonRequest, MediaType.APPLICATION_JSON_TYPE));
 
 		if (response.getStatus() == Status.OK.getStatusCode()) {
-			return this.qpxResponseParser.parseResponse(response.readEntity(String.class));
+			return gson.fromJson(response.readEntity(String.class), QpxResponse.class);
 		}
 		else {
 			return handleErrorStatus(response);
@@ -48,7 +49,7 @@ public class QpxClient {
 
 	}
 
-	private List<RoundTripDto> handleErrorStatus(Response response) {
+	private QpxResponse handleErrorStatus(Response response) {
 		if (response.getStatus() == Status.BAD_REQUEST.getStatusCode()) {
 			throw new QpxBadRequestException("Api Key or flight form is invalid");
 		}
