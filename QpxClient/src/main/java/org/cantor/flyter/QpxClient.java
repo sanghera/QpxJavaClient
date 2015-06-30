@@ -5,7 +5,8 @@ import org.cantor.flyter.exceptions.QpxBadRequestException;
 import org.cantor.flyter.exceptions.QpxCommunicationException;
 import org.cantor.flyter.exceptions.QpxUnexpectedInteractionException;
 import org.cantor.flyter.model.request.QpxRequestForm;
-import org.cantor.flyter.model.response.QpxResponse;
+import org.cantor.flyter.model.request.Request;
+import org.cantor.flyter.model.response.RoundTripDto;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -13,7 +14,8 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.*;
+import java.util.List;
+import java.util.Properties;
 
 public class QpxClient {
 
@@ -29,29 +31,26 @@ public class QpxClient {
 		this.qpxResponseParser = qpxResponseParser;
 	}
 
-	public Collection<QpxResponse> fetchData(QpxRequestForm requestForm) {
+	public List<RoundTripDto> fetchData(QpxRequestForm requestForm) {
 		Invocation.Builder request = this.createRequest();
 
 		Gson gson = new Gson();
-		String json = gson.toJson(requestForm);
+		String jsonRequest = gson.toJson(requestForm);
 
-		List<QpxResponse> tripsFound = new ArrayList<>();
+		System.out.println(jsonRequest);
 
-		Response response = request.post(Entity.entity(json, MediaType.APPLICATION_JSON_TYPE));
+		Response response = request.post(Entity.entity(jsonRequest, MediaType.APPLICATION_JSON_TYPE));
 
 		if (response.getStatus() == Status.OK.getStatusCode()) {
-			Collection<QpxResponse> tripDtos = this.qpxResponseParser.parseResponse(response);
-			tripDtos.forEach(tripsFound::add);
+			return this.qpxResponseParser.parseResponse(response.readEntity(String.class));
 		}
 		else {
 			return handleErrorStatus(response);
 		}
 
-
-		return Collections.unmodifiableCollection(tripsFound);
 	}
 
-	private List<QpxResponse> handleErrorStatus(Response response) {
+	private List<RoundTripDto> handleErrorStatus(Response response) {
 		if (response.getStatus() == Status.BAD_REQUEST.getStatusCode()) {
 			throw new QpxBadRequestException("Api Key or flight form is invalid");
 		}

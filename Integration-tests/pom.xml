@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>QpxClient</artifactId>
+    <artifactId>Integration-tests</artifactId>
     <packaging>jar</packaging>
 
-    <name>QpxClient</name>
+    <name>Integration-tests</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,21 +20,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-jetty-servlet</artifactId>
-            <version>2.9</version>
+            <groupId>org.cantor.flyter</groupId>
+            <artifactId>QpxClient</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

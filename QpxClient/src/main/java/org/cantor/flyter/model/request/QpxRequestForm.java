@@ -3,22 +3,13 @@ package org.cantor.flyter.model.request;
 
 public class QpxRequestForm {
 
-	protected String origin;
-	protected String destination;
+	private Request request;
 
-	public String getOrigin() {
-		return origin;
+	public Request getRequest() {
+		return request;
 	}
 
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 }

@@ -87,3 +87,4 @@ buildNumber.properties
 
 FlexibleFlightFinder-IT/src/main/resources/qpxconfig.properties
 FlexibleFlightFinder-core/src/main/resources/qpxconfig.properties
+Integration-tests/src/test/resources/qpxconfig.properties

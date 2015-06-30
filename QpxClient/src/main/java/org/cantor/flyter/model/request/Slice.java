@@ -1,20 +1,21 @@
 package org.cantor.flyter.model.request;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Slice {
 
-	private String kind;
+	private String kind = "qpxexpress#sliceInput";
 	private String origin;
 	private String destination;
 	private String date;
-	private int maxStops;
-	private int maxConnectionDuration;
+	private Integer maxStops;
+	private Integer maxConnectionDuration;
 	private String preferredCabin;
 	private PermittedDepartureTime permittedDepartureTime;
-	private List<String> permittedCarriers;
+	private List<String> permittedCarriers = new ArrayList<>();
 	private String alliance;
-	private List<String> prohibitedCarriers;
+	private List<String> prohibitedCarriers = new ArrayList<>();
 
 	public String getKind() {
 		return kind;
@@ -48,19 +49,19 @@ public class Slice {
 		this.date = date;
 	}
 
-	public int getMaxStops() {
+	public Integer getMaxStops() {
 		return maxStops;
 	}
 
-	public void setMaxStops(int maxStops) {
+	public void setMaxStops(Integer maxStops) {
 		this.maxStops = maxStops;
 	}
 
-	public int getMaxConnectionDuration() {
+	public Integer getMaxConnectionDuration() {
 		return maxConnectionDuration;
 	}
 
-	public void setMaxConnectionDuration(int maxConnectionDuration) {
+	public void setMaxConnectionDuration(Integer maxConnectionDuration) {
 		this.maxConnectionDuration = maxConnectionDuration;
 	}
 
@@ -84,6 +85,10 @@ public class Slice {
 		return permittedCarriers;
 	}
 
+	public void addPermittedCarrier(String permittedCarrier) {
+		this.permittedCarriers.add(permittedCarrier);
+	}
+
 	public void setPermittedCarriers(List<String> permittedCarriers) {
 		this.permittedCarriers = permittedCarriers;
 	}
@@ -98,6 +103,10 @@ public class Slice {
 
 	public List<String> getProhibitedCarriers() {
 		return prohibitedCarriers;
+	}
+
+	public void addProhibitedCarrier(String prohibitedCarrier) {
+		this.permittedCarriers.add(prohibitedCarrier);
 	}
 
 	public void setProhibitedCarriers(List<String> prohibitedCarriers) {

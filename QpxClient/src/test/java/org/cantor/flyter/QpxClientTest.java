@@ -67,14 +67,13 @@ public class QpxClientTest {
 	public void setup() {
 		willReturn(API_KEY).given(properties).getProperty(API_KEY_PROPERTY);
 		willReturn(ENDPOINT_URL).given(properties).getProperty(ENDPOINT_URL_PROPERTY);
-		willReturn(tripDtos).given(qpxResponseParser).parseResponse(response);
+		willReturn(tripDtos).given(qpxResponseParser).parseResponse(any(String.class));
 		qpxClient = new QpxClient(client, properties, qpxResponseParser);
 		setupWebServiceCall();
 	}
 
 	@Test
 	public void givenARequestForm_whenFetchingFlightsInfo_thenAnHttpPostIsMadeToTheWebService(){
-		setupRequestForm();
 		qpxClient.fetchData(requestForm);
 
 		verify(request).post(any(Entity.class));
@@ -99,11 +98,6 @@ public class QpxClientTest {
 		willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
 		qpxClient.fetchData(requestForm);
-	}
-
-	private void setupRequestForm() {
-		requestForm.setOrigin("origin");
-		requestForm.setDestination("destination");
 	}
 
 	private void setupWebServiceCall() {

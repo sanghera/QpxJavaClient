@@ -2,7 +2,7 @@ package org.cantor.flyter.model.request;
 
 public class PermittedDepartureTime {
 
-	private String kind;
+	private String kind = "qpxexpress#timeOfDayRange";
 	private String earliestTime;
 	private String latestTime;
 

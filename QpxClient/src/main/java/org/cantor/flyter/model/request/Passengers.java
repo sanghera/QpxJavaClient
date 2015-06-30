@@ -2,12 +2,12 @@ package org.cantor.flyter.model.request;
 
 public class Passengers {
 
-	private String kind;
-	private int adultCount;
-	private int childCount;
-	private int infantInLapCount;
-	private int infantInSeatCount;
-	private int seniorCount;
+	private String kind = "qpxexpress#passengerCounts";
+	private Integer adultCount;
+	private Integer childCount;
+	private Integer infantInLapCount;
+	private Integer infantInSeatCount;
+	private Integer seniorCount;
 
 	public String getKind() {
 		return kind;
@@ -17,43 +17,43 @@ public class Passengers {
 		this.kind = kind;
 	}
 
-	public int getAdultCount() {
+	public Integer getAdultCount() {
 		return adultCount;
 	}
 
-	public void setAdultCount(int adultCount) {
+	public void setAdultCount(Integer adultCount) {
 		this.adultCount = adultCount;
 	}
 
-	public int getChildCount() {
+	public Integer getChildCount() {
 		return childCount;
 	}
 
-	public void setChildCount(int childCount) {
+	public void setChildCount(Integer childCount) {
 		this.childCount = childCount;
 	}
 
-	public int getInfantInLapCount() {
+	public Integer getInfantInLapCount() {
 		return infantInLapCount;
 	}
 
-	public void setInfantInLapCount(int infantInLapCount) {
+	public void setInfantInLapCount(Integer infantInLapCount) {
 		this.infantInLapCount = infantInLapCount;
 	}
 
-	public int getInfantInSeatCount() {
+	public Integer getInfantInSeatCount() {
 		return infantInSeatCount;
 	}
 
-	public void setInfantInSeatCount(int infantInSeatCount) {
+	public void setInfantInSeatCount(Integer infantInSeatCount) {
 		this.infantInSeatCount = infantInSeatCount;
 	}
 
-	public int getSeniorCount() {
+	public Integer getSeniorCount() {
 		return seniorCount;
 	}
 
-	public void setSeniorCount(int seniorCount) {
+	public void setSeniorCount(Integer seniorCount) {
 		this.seniorCount = seniorCount;
 	}
 }
