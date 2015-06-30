@@ -1,7 +1,6 @@
 package org.cantor.flyter;
 
 
-import org.cantor.flyter.model.response.RoundTripDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

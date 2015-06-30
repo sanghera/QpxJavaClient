@@ -1,4 +1,4 @@
-package org.cantor.flyter.model.response;
+package org.cantor.flyter;
 
 public class TripDto {
 

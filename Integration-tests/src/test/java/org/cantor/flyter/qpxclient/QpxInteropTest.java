@@ -2,11 +2,11 @@ package org.cantor.flyter.qpxclient;
 
 import org.cantor.flyter.QpxClient;
 import org.cantor.flyter.QpxResponseParser;
+import org.cantor.flyter.RoundTripDto;
 import org.cantor.flyter.model.request.Passengers;
 import org.cantor.flyter.model.request.QpxRequestForm;
 import org.cantor.flyter.model.request.Request;
 import org.cantor.flyter.model.request.Slice;
-import org.cantor.flyter.model.response.RoundTripDto;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -40,7 +40,7 @@ public class QpxInteropTest {
 	}
 
 	@Before
-	public void setup(){
+	public void setup() {
 		Client client = ClientBuilder.newClient();
 		requestForm = new QpxRequestForm();
 		qpxClient = new QpxClient(client, properties, new QpxResponseParser());
@@ -48,7 +48,7 @@ public class QpxInteropTest {
 	}
 
 	@Test
-	public void canFetchDataFromQpxApi(){
+	public void canFetchDataFromQpxApi() {
 		List<RoundTripDto> roundTripDtos = qpxClient.fetchData(requestForm);
 
 		RoundTripDto roundTripDto = roundTripDtos.get(0);

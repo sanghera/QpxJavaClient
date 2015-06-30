@@ -5,8 +5,6 @@ import org.cantor.flyter.exceptions.QpxBadRequestException;
 import org.cantor.flyter.exceptions.QpxCommunicationException;
 import org.cantor.flyter.exceptions.QpxUnexpectedInteractionException;
 import org.cantor.flyter.model.request.QpxRequestForm;
-import org.cantor.flyter.model.request.Request;
-import org.cantor.flyter.model.response.RoundTripDto;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;

@@ -1,8 +1,6 @@
 package org.cantor.flyter;
 
 
-import org.cantor.flyter.model.response.RoundTripDto;
-import org.cantor.flyter.model.response.TripDto;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,13 +23,10 @@ public class QpxResponseParser {
 
 			JSONArray tripResults = (JSONArray) trips.get("tripOption");
 
-			int counter = 0;
-
 			for (Object result : tripResults) {
 
 				RoundTripDto roundTripDto = new RoundTripDto();
 
-				counter++;
 				JSONObject resultJSon = (JSONObject) result;
 
 				String tripPrice = (String) resultJSon.get("saleTotal");
