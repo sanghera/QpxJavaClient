@@ -47,7 +47,7 @@ public class QpxInteropTest {
 	}
 
 	@Test
-	public void canFetchDataFromQpxApi() {
+	public void canFetchDataFromQpxApi() throws Exception {
 		QpxResponse qpxResponse = qpxClient.fetchData(requestForm);
 
 		System.out.println(qpxResponse.getTrips().getTripOption().get(0).getSaleTotal());

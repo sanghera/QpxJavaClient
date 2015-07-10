@@ -1,6 +1,7 @@
 package org.cantor.flyter;
 
 import com.google.gson.Gson;
+import org.cantor.flyter.exceptions.QpxNoSolutionFoundException;
 import org.cantor.flyter.exceptions.QpxBadRequestException;
 import org.cantor.flyter.exceptions.QpxCommunicationException;
 import org.cantor.flyter.exceptions.QpxUnexpectedInteractionException;
@@ -27,26 +28,30 @@ public class QpxClient {
 		this.endpointURL = properties.getProperty("endpoint_url");
 	}
 
-	public QpxResponse fetchData(QpxRequestForm requestForm) {
+	public QpxResponse fetchData(QpxRequestForm requestForm)
+			throws QpxUnexpectedInteractionException, QpxBadRequestException, QpxCommunicationException, QpxNoSolutionFoundException {
+
 		Invocation.Builder request = this.createRequest();
 
 		Gson gson = new Gson();
 		String jsonRequest = gson.toJson(requestForm);
 
-		System.out.println(jsonRequest);
-
 		Response response = request.post(Entity.entity(jsonRequest, MediaType.APPLICATION_JSON_TYPE));
 
 		if (response.getStatus() == Status.OK.getStatusCode()) {
-			return gson.fromJson(response.readEntity(String.class), QpxResponse.class);
+			QpxResponse qpxResponse = gson.fromJson(response.readEntity(String.class), QpxResponse.class);
+
+			handleNoSolutionFound(qpxResponse);
+
+			return qpxResponse;
 		}
 		else {
 			return handleErrorStatus(response);
 		}
-
 	}
 
-	private QpxResponse handleErrorStatus(Response response) {
+	private QpxResponse handleErrorStatus(Response response)
+			throws QpxBadRequestException, QpxCommunicationException, QpxUnexpectedInteractionException {
 		if (response.getStatus() == Status.BAD_REQUEST.getStatusCode()) {
 			throw new QpxBadRequestException("Api Key or flight form is invalid");
 		}
@@ -55,6 +60,16 @@ public class QpxClient {
 		}
 		else {
 			throw new QpxUnexpectedInteractionException("An unexpected error occurred while interacting with QPX web service");
+		}
+	}
+
+	private void handleNoSolutionFound(QpxResponse qpxResponse) throws QpxNoSolutionFoundException {
+		if (qpxResponse != null && qpxResponse.getTrips() != null && qpxResponse.getTrips()
+																				.getData() != null && qpxResponse.getTrips()
+																												 .getData()
+																												 .getAirport() == null) {
+			throw new QpxNoSolutionFoundException("No flight has been found.");
+
 		}
 	}
 
