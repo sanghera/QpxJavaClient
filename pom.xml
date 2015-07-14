@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cantor.flyter</groupId>
-    <artifactId>Flyter</artifactId>
+    <artifactId>QpxJavaClient</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
